@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Theme Switcher</title>
+
+  <style>
+    /* Light theme */
+    body {
+      background-color: white;
+      color: black;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 50px;
+      transition: 0.3s;
+    }
+
+    /* Dark theme */
+    body.dark {
+      background-color: #222;
+      color: white;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Theme Switcher</h1>
+
+  <p id="message">
+    Your selected theme will be saved.
+  </p>
+
+  <button id="themeButton">
+    🌙 Dark Mode
+  </button>
+
+
+  <script>
+
+    const button = document.getElementById("themeButton");
+
+    // Apply saved theme when page loads
+    const savedTheme = localStorage.getItem("theme");
+
+    if (savedTheme === "dark") {
+      document.body.classList.add("dark");
+      button.textContent = "☀️ Light Mode";
+    }
+
+
+    // Toggle theme
+    button.addEventListener("click", function() {
+
+      document.body.classList.toggle("dark");
+
+      // Check current theme
+      if (document.body.classList.contains("dark")) {
+
+        // Save dark theme
+        localStorage.setItem("theme", "dark");
+
+        button.textContent = "☀️ Light Mode";
+
+      } else {
+
+        // Save light theme
+        localStorage.setItem("theme", "light");
+
+        button.textContent = "🌙 Dark Mode";
+      }
+
+    });
+
+  </script>
+
+</body>
+</html>
+

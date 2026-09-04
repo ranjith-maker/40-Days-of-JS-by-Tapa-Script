@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamic Table</title>
+
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 600px;
+      margin-top: 20px;
+    }
+
+    th, td {
+      border: 1px solid black;
+      padding: 10px;
+      text-align: center;
+    }
+
+    input, select, button {
+      margin: 5px;
+      padding: 8px;
+    }
+  </style>
+</head>
+
+<body style="background-color: rgb(218, 168, 93);" >
+
+  <h2>Dynamic Employee Table</h2>
+
+  <!-- Form to add rows -->
+  <form id="employeeForm">
+
+    <input
+      type="text"
+      id="name"
+      placeholder="Enter Name"
+      required
+    >
+
+    <input
+      type="number"
+      id="age"
+      placeholder="Enter Age"
+      required
+    >
+
+    <input
+      type="text"
+      id="role"
+      placeholder="Enter Role"
+      required
+    >
+
+    <button type="submit">Add Row</button>
+  </form>
+
+  <!-- Search -->
+  <br>
+
+  <input
+    type="text"
+    id="search"
+    placeholder="Search by name..."
+  >
+
+  <!-- Dynamic table -->
+  <table id="employeeTable">
+
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Role</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+
+    <tbody id="tableBody">
+    </tbody>
+
+  </table>
+
+  <script>
+
+    const form = document.getElementById("employeeForm");
+    const table = document.getElementById("employeeTable");
+    const tableBody = document.getElementById("tableBody");
+    const search = document.getElementById("search");
+
+    // Add a new row
+    form.addEventListener("submit", function(event) {
+
+      event.preventDefault();
+
+      // Get form values
+      const name = document.getElementById("name").value;
+      const age = document.getElementById("age").value;
+      const role = document.getElementById("role").value;
+
+      // Insert a new row
+      const row = tableBody.insertRow();
+
+      // Create cells
+      const nameCell = row.insertCell(0);
+      const ageCell = row.insertCell(1);
+      const roleCell = row.insertCell(2);
+      const actionCell = row.insertCell(3);
+
+      // Add values using textContent
+      nameCell.textContent = name;
+      ageCell.textContent = age;
+      roleCell.textContent = role;
+
+      // Create Delete button
+      const deleteButton = document.createElement("button");
+      deleteButton.textContent = "Delete";
+
+      // Delete row
+      deleteButton.addEventListener("click", function() {
+
+        const rowIndex = row.rowIndex;
+
+        // deleteRow() is called on the table
+        table.deleteRow(rowIndex);
+
+      });
+
+      actionCell.appendChild(deleteButton);
+
+      // Clear form
+      form.reset();
+
+    });
+
+
+    // Search/filter rows by name
+    search.addEventListener("input", function() {
+
+      const searchValue = search.value.toLowerCase();
+
+      const rows = tableBody.rows;
+
+      for (let i = 0; i < rows.length; i++) {
+
+        // Get the name from the first cell
+        const name = rows[i].cells[0].textContent.toLowerCase();
+
+        if (name.includes(searchValue)) {
+          rows[i].style.display = "";
+        } else {
+          rows[i].style.display = "none";
+        }
+
+      }
+
+    });
+
+  </script>
+
+</body>
+</html>

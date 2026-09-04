@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dynamic Form</title>
+</head>
+<body>
+
+<div id="container"></div>
+
+<script>
+    // Get container
+    const container = document.getElementById("container");
+
+    // Create form
+    const form = document.createElement("form");
+    form.setAttribute("id", "myForm");
+
+    // Create selection dropdown
+    const select = document.createElement("select");
+    select.setAttribute("id", "inputType");
+
+    // Options
+    const types = ["text", "email", "number"];
+
+    types.forEach(function (type) {
+        const option = document.createElement("option");
+        option.setAttribute("value", type);
+        option.textContent = type;
+        select.appendChild(option);
+    });
+
+    // Add dropdown to form
+    form.appendChild(select);
+
+    // Button to add input
+    const addButton = document.createElement("button");
+    addButton.setAttribute("type", "button");
+    addButton.textContent = "Add Input";
+
+    form.appendChild(addButton);
+
+    // Container for dynamic inputs
+    const inputContainer = document.createElement("div");
+    form.appendChild(inputContainer);
+
+    // Submit button
+    const submitButton = document.createElement("button");
+    submitButton.setAttribute("type", "submit");
+    submitButton.textContent = "Submit";
+
+    form.appendChild(submitButton);
+
+    // Reset button
+    const resetButton = document.createElement("button");
+    resetButton.setAttribute("type", "reset");
+    resetButton.textContent = "Reset";
+
+    form.appendChild(resetButton);
+
+    // Add form to page
+    container.appendChild(form);
+
+    // Add input dynamically
+    addButton.addEventListener("click", function () {
+
+        const type = select.value;
+
+        const input = document.createElement("input");
+
+        input.setAttribute("type", type);
+        input.setAttribute("name", type + inputContainer.children.length);
+        input.setAttribute("placeholder", "Enter " + type);
+
+        inputContainer.appendChild(input);
+        inputContainer.appendChild(document.createElement("br"));
+    });
+
+    // Submit form
+    form.addEventListener("submit", function (event) {
+
+        event.preventDefault();
+
+        const inputs = inputContainer.querySelectorAll("input");
+
+        const data = {};
+
+        inputs.forEach(function (input) {
+            data[input.name] = input.value;
+        });
+
+        console.log(data);
+    });
+
+    // Reset form
+    resetButton.addEventListener("click", function () {
+        inputContainer.innerHTML = "";
+    });
+</script>
+
+</body>
+</html>
