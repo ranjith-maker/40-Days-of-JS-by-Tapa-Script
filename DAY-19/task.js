@@ -1,0 +1,156 @@
+
+
+// DAY -19 DOM Tasks
+/**1. Create a Dynamic Tabbed Interface
+Build a clean, accessible tab component where clicking on a tab header displays the corresponding tab content. It mimics real-world use like dashboards, profile settings, or pricing plans.
+
+Functional Requirements
+✅ Clicking a tab title shows the corresponding content.
+
+✅ Only one tab content is visible at a time.
+
+✅ The active tab should have a visual highlight.
+
+✅ Add a keyboard shortcut: pressing 1, 2, or 3 switches to that tab.
+
+Example:
+
+document.addEventListener("keydown", (e) => {
+    if (e.key === "1") switchToTab(1);
+    if (e.key === "2") switchToTab(2);
+    if (e.key === "3") switchToTab(3);
+    });
+✅ Use event delegation to handle tab clicks.
+
+✅ Use classList to manage active state.
+
+✅ Use a custom event to broadcast when a tab is changed (log tab name to console).
+
+✅ Use stopPropagation() if needed during advanced control.
+
+Basic HTML Structure
+<div class="tabs">
+  <div class="tab-headers">
+    <button class="tab active" data-tab="1">Home</button>
+    <button class="tab" data-tab="2">About</button>
+    <button class="tab" data-tab="3">Contact</button>
+  </div>
+  <div class="tab-contents">
+    <div class="content active" data-tab="1">Welcome to Home</div>
+    <div class="content" data-tab="2">About us page here.</div>
+    <div class="content" data-tab="3">Contact info displayed here.</div>
+  </div>
+</div>
+
+
+
+*/
+
+    const tabHeaders = document.querySelector(".tab-headers");
+    const tabs = document.querySelectorAll(".tab");
+    const contents = document.querySelectorAll(".content");
+
+
+    // Function to switch tabs
+    function switchToTab(tabNumber) {
+
+      // Find the selected tab
+      const selectedTab = document.querySelector(
+        `.tab[data-tab="${tabNumber}"]`
+      );
+
+      const selectedContent = document.querySelector(
+        `.content[data-tab="${tabNumber}"]`
+      );
+
+      // Stop if tab doesn't exist
+      if (!selectedTab || !selectedContent) {
+        return;
+      }
+
+
+      // Remove active state from all tabs
+      tabs.forEach(tab => {
+        tab.classList.remove("active");
+        tab.setAttribute("aria-selected", "false");
+      });
+
+
+      // Hide all contents
+      contents.forEach(content => {
+        content.classList.remove("active");
+        content.hidden = true;
+      });
+
+
+      // Activate selected tab
+      selectedTab.classList.add("active");
+      selectedTab.setAttribute("aria-selected", "true");
+
+
+      // Show selected content
+      selectedContent.classList.add("active");
+      selectedContent.hidden = false;
+
+
+      // Create custom event
+      const tabChangeEvent = new CustomEvent("tabChanged", {
+        detail: {
+          tabNumber: tabNumber,
+          tabName: selectedTab.textContent.trim()
+        }
+      });
+
+
+      // Broadcast the custom event
+      document.dispatchEvent(tabChangeEvent);
+    }
+
+
+    // Event delegation for tab clicks
+    tabHeaders.addEventListener("click", function(event) {
+
+      // Make sure only tab buttons are handled
+      const clickedTab = event.target.closest(".tab");
+
+      if (!clickedTab) {
+        return;
+      }
+
+      // Prevent the event from continuing upward
+      event.stopPropagation();
+
+      const tabNumber = clickedTab.dataset.tab;
+
+      switchToTab(tabNumber);
+    });
+
+
+    // Keyboard shortcuts: 1, 2, 3
+    document.addEventListener("keydown", function(event) {
+
+      if (event.key === "1") {
+        switchToTab(1);
+      }
+
+      if (event.key === "2") {
+        switchToTab(2);
+      }
+
+      if (event.key === "3") {
+        switchToTab(3);
+      }
+
+    });
+
+
+    // Listen for custom tab change event
+    document.addEventListener("tabChanged", function(event) {
+
+      console.log(
+        "Tab changed to:",
+        event.detail.tabName
+      );
+
+    });
+
