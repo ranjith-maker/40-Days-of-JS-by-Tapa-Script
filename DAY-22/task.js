@@ -87,7 +87,8 @@ delay('Task Done', 2000, ()=>console.log('Callback fired'))
 
 
 
-4. Implement a function that filters numbers in an array based on a condition provided via callback
+4. Implement a function that filters numbers in an array based on a 
+condition provided via callback
 function filterNumbers(arr, conditionCallback) {
   // Use loop and callback to return filtered array
 }
@@ -149,4 +150,3 @@ task1(()=>{
 })
 */
 // Execute a sequence of tasks one after another using callbacks
-
