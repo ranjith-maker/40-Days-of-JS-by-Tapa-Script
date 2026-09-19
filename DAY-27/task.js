@@ -77,12 +77,17 @@ Let's do it!, f1, , in settimeout, f1, f1, f1
 
  Answer - Option B
 //Explanation 
-"Let's do it!" is executed first because it is a normal synchronous statement and goes into the Execution Stack.
-setTimeout(..., 0) sends the callback function to the Browser/Web API. Even though the timeout is 0, it does not execute immediately. The callback is placed in the Callback Queue after the timer completes.
-f1() is then called four times. Since these are normal synchronous function calls, each f1() is executed immediately on the Execution Stack.
-Therefore, f1 is printed four times before the setTimeout callback gets a chance to execute.
-After the synchronous code finishes, the Execution Stack becomes empty.
-The Event Loop then checks the Callback Queue and moves the setTimeout callback to the Execution Stack.
+"Let's do it!" is executed first because it is a normal synchronous 
+statement and goes into the Execution Stack.
+setTimeout(..., 0) sends the callback function to the Browser/Web API. 
+Even though the timeout is 0, it does not execute immediately.
+ The callback is placed in the Callback Queue after the timer completes.
+f1() is then called four times. Since these are normal synchronous function calls,
+ each f1() is executed immediately on the Execution Stack.
+Therefore, f1 is printed four times before the setTimeout callback gets a
+ chance to execute. After the synchronous code finishes, the Execution Stack
+  becomes empty. The Event Loop then checks the Callback Queue and moves
+   the setTimeout callback to the Execution Stack.
 Finally, "in settimeout" is printed.
 
 
@@ -135,7 +140,8 @@ Ans Option - A
 Explanation
 cartoon() is called, so it starts executing on the Execution Stack.
 console.log('Cartoon') executes immediately, so Cartoon is printed first.
-setTimeout(tom, 5000) sends tom to the Web API/Timer. After 5 seconds, its callback will be placed in the Callback Queue.
+setTimeout(tom, 5000) sends tom to the Web API/Timer. 
+After 5 seconds, its callback will be placed in the Callback Queue.
 The Promise is created and immediately resolved with the value "should it be right after Tom, before Jerry?".
 The .then() callback is placed in the Microtask Queue. It does not execute immediately.
 jerry() is then called synchronously, so Jerry is printed before the Promise's .then() callback.
