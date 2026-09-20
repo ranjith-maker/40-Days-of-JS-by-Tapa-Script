@@ -63,7 +63,8 @@ res('once again we resolved now')
 })
 
 in interview ques, whats the output?
-only one state could be done , either res or rej, in above sum case, only first res runs
+only one state could be done , either res or rej, 
+in above sum case, only first res runs
 
 
 
@@ -81,7 +82,10 @@ res(user)
 
 })
 
-Rule 2: You can do mainly three valuable things from the .then() method. You can return another promise(for async operation). You can return any other value from a synchronous operation. Lastly, you can throw an error.
+Rule 2: You can do mainly three valuable things from the 
+.then() method. You can return another promise(for async operation). 
+You can return any other value from a synchronous operation.
+ Lastly, you can throw an error.
 
  Return a promise from the .then() handler
 
@@ -217,7 +221,8 @@ we need to show all 3 available routes, like Bus, Airline, Train, we have info 3
 so 3 api calls needed to see the timings, seats  
 In that time
 
-1)  Promise.all(['api1', 'api2', 'api3'])it takes an array of promises, It returns a promise that resolves to an array of values.
+1)  Promise.all(['api1', 'api2', 'api3'])it takes an array of promises,
+ It returns a promise that resolves to an array of values.
 
 
 const BULBASAUR_POKEMONS_URL = 'https://pokeapi.co/api/v2/pokemon/bulbasaur';
@@ -271,7 +276,8 @@ Promise.all(if any 1 api gets an error ,rest all works well,
 still it throws an error, it gives only resolved ones, either all or nothing)
 
 
-Promise.any(), it returns the first successful response , dont wait fro all 3 to get succeed
+Promise.any(), it returns the first successful response ,
+ dont wait fro all 3 to get succeed
 
 
 
@@ -313,8 +319,9 @@ let urls = ['https://pokeapi.co/api/2/pokemon/bulbasaur' ,
             'https://pokeapi.co/api/v2/pokemon/kakuna'
  ]
 
-Promise.any() returns the first fulfilled promise; individual rejected promises aren't exposed
- if another promise fulfills; and no single Promise can both fulfill and reject.
+Promise.any() returns the first fulfilled promise; individual rejected promises 
+aren't exposed if another promise fulfills; 
+and no single Promise can both fulfill and reject.
 
 
 So why does Chrome show the red error?
@@ -323,7 +330,8 @@ This:
 
 GET https://pokeapi.co/api/v2/pokemo/raticate 400 (Bad Request)
 
-is a Chrome DevTools network error message, not necessarily a rejected JavaScript Promise.
+is a Chrome DevTools network error message, not necessarily
+ a rejected JavaScript Promise.
 
 Chrome is telling you:
 "Hey, this HTTP request received a 400 response."
