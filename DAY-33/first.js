@@ -394,3 +394,24 @@ so it's useful for temporary object-associated data and caches."
  * 
  * 
  */
+function Dups(str) {
+    const obj = {}
+for(let key of str){
+if(obj[key]){
+    obj[key] += 1
+}    else{
+    obj[key] = 1
+}}
+
+let num = ''
+
+for(let key of obj){
+    if(obj[key] > 1){
+        return key
+    }
+}
+
+}
+
+let res = Dups('banana')
+console.log(res)
