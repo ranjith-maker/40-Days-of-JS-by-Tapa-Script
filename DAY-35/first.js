@@ -20,6 +20,7 @@ return total - total * discount
 console.log(calculateDiscount(50) ) //45
 console.log(calculateDiscount(600) ) //540 
 console.log(calculateDiscount(350) ) //315
+
 why, because JS reads from top to bottom, when it sees the calcualte total is 600
 it comes to the first condition, is 600 higher than equal to 100 then then apply 0.10
 it wont goto else if().The learning here is when we working on Range
