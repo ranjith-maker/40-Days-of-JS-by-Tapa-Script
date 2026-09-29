@@ -26,7 +26,7 @@ do we need to write our program in such a way that this memory managememnt happe
 who manages this stack heap memory ?
 
 It is handled by the JS engine itself, it utilizes a proces called Garbage collection
-as a dev we dont need to write  code foe managing memroy directly like C 
+as a dev we dont need to write  code for managing memroy directly like C 
 the way we write code that might determine how GC might behave  at the end of the day
 
 It is an automatic MM, it also has the capability to free thise memory up when those arent userd 
