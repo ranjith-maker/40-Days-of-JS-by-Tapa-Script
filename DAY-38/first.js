@@ -167,6 +167,39 @@ Setting a.ref = null and b.ref = null explicitly breaks the cycle, removing thos
 
 
 
+function deepClone(obj) {
+    if (obj === null || typeof obj !== "object") {
+        return obj;
+    }
+
+    const clone = Array.isArray(obj) ? [] : {};
+
+    for (const key in obj) {
+        clone[key] = deepClone(obj[key]);
+    }
+
+    return clone;
+}
+
+
+const original = {
+    name: "John",
+    address: {
+        city: "Madurai",
+        zip: 625001
+    }
+};
+
+let newOne = deepClone(original)
+
+// console.log(newOne);
+console.log(original === newOne)
+
+
+//{ name: 'John', address: { city: 'Madurai', zip: 625001 } }
+
+
+
 
 Step 5 — Remove button from DOM
 btn.remove();
